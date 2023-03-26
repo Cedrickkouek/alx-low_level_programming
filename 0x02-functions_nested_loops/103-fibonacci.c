@@ -10,7 +10,7 @@ int main(void)
 	i = 0;
 	j = 1;
 	sum = 0;
-	for (count = 0; count <= 100; count++)
+	for (count = 0; count < 50; count++)
 	{
 		k = i + j;
 		i = j;
@@ -20,6 +20,6 @@ int main(void)
 			sum += k;
 		}
 	}
-	printf("%lu", sum);
+	printf("%lu\n", sum);
 	return (0);
 }
