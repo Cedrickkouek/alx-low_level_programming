@@ -9,7 +9,7 @@ int main(void)
 
 	i = 0;
 	j = 1;
-	for (count = 0; count < 98; count++)
+	for (count = 0; count < 91; count++)
 	{
 		k = i + j;
 		i = j;
@@ -17,7 +17,7 @@ int main(void)
 
 		printf("%lu", k);
 
-		if (count < 98)
+		if (count < 91)
 		{
 			printf(", ");
 		}
