@@ -15,7 +15,7 @@ int main(void)
 		k = i + j;
 		i = j;
 		j = k;
-		if (k % 2 == 0 && k <= 4000000)
+		if (k % 2 == 0 && k < 4000000)
 		{
 			sum += k;
 		}
