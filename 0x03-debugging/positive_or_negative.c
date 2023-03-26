@@ -2,7 +2,7 @@
 #include <time.h>
 #include <stdio.h>
 /* more headers goes there */
-/*Main part tells us whether the number is positive, negative or zero*/
+
 /* betty style doc for function main goes there */
 int main(void)
 {
@@ -19,7 +19,7 @@ int main(void)
 	{
 		printf("%d is negative\n", n);
 	}
-	else
+	else if (n == 0)
 	{
 		printf("%d is zero\n", n);
 	}
