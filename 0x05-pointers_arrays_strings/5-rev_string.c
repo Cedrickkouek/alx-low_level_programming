@@ -1,6 +1,6 @@
 #include "main.h"
 /**
- * rev-string - print reverse characters.
+ * rev_string - print reverse characters.
  * @s: validate the character
  * Return: Always 0.
  */
