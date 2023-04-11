@@ -3,7 +3,7 @@
 #include <string.h>
 /**
  * num_checker - checks if a given char is number or not
- * @: char to be checked
+ * @a: char to be checked
  * Return: 1 if it is a number else it returns 0
  **/
 int num_checker(char *a)
@@ -17,7 +17,7 @@ int num_checker(char *a)
 	{
 		if (a[i] < '0' || a[i] > '9')
 		{
-			return (-1);
+			return (1);
 		}
 		else
 		{
