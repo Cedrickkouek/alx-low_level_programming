@@ -20,6 +20,7 @@ void ch_free_grid(char **grid, unsigned int height)
 /**
  * strtow - main entry
  * @str: input
+ * height: input
  * Return: 0
  */
 char **strtow(char *str)
