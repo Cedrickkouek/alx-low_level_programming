@@ -3,6 +3,8 @@
 /**
  * argstostr - concatenates all the arguments of the function.
  * Return: Concatenated characters
+ * @ac: input
+ * @av: input
  */
 char *argstostr(int ac, char **av)
 {
