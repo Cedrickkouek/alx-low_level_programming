@@ -1,9 +1,10 @@
 #include "main.h"
+#include <stdlib.h>
 /**
  *
  *
  */
-char *argstostr(int ac, char **av);
+char *argstostr(int ac, char **av)
 {
 	int i, n, k = 0, len = 0;
 	char *str;
