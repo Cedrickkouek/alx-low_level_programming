@@ -1,8 +1,8 @@
 #include "main.h"
 #include <stdlib.h>
 /**
- *
- *
+ * argstostr - concatenates all the arguments of the function.
+ * Return: Concatenated characters
  */
 char *argstostr(int ac, char **av)
 {
