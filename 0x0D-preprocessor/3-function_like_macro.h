@@ -1,5 +1,5 @@
-#ifndef FUNCTION_LIKE_MACRO_H
-#define FUNCTION_LIKE_MACRO_H
+#ifndef ABS_h
+#define ABS_h
 /**
  * Header File: 3-function_like_macro.h
  * Description: Header File that define a function-like macro ABS(x)
