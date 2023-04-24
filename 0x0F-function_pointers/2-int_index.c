@@ -5,23 +5,25 @@
  * @array: array check.
  * @size: size of array.
  * Return: 0 if false.
+ * @cmp: pointer to function
  */
 int int_index(int *array, int size, int (*cmp)(int))
 {
-	int i, x;
+	int i;
 
-	if (array && size > 0 && cmp)
+	if (array && cmp)
 	{
-		x = 0;
+		if (size <= 0)
+		{
+			return (-1);
+		}
 		for (i = 0; i < size; i++)
 		{
-			x = cmp(array[i]);
-			if (x == 1)
+			if (cmp(array[i]))
 			{
 				return (i);
 			}
 		}
-		return (-1);
 	}
 	return (-1);
 }
