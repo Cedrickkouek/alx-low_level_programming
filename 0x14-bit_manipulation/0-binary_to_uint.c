@@ -8,13 +8,13 @@
 unsigned int binary_to_uint(const char *b)
 {
 	unsigned int y = 0;
-	int len, base = 1;
+	int len = 0, base = 1;
 
 	if (!b)
 	{
 		return (0);
 	}
-	while (b[len])
+	while(b[len])
 	{
 		len++;
 	}
