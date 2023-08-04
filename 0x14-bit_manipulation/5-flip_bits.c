@@ -22,5 +22,5 @@ unsigned int flip_bits(unsigned long int n, unsigned long int m)
 		mirror >>= 1;
 	}
 
-	return numofbits;
+	return (numofbits);
 }
