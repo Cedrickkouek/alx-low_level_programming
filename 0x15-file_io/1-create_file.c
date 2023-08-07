@@ -9,25 +9,22 @@ int create_file(const char *filename, char *text_content)
 {
 	int fs, num, wr;
 
-	if (!filename)
+	if (filename == NULL)
 	{
 		return (-1);
 	}
-	
-	fs = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 
-	if (!text_content)
+	fs = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0600);
+
+	if (text_content == NULL)
 	{
 		text_content = "";
 	}
 
-	for (num = 0; text_content[num]; num++)
-	{
-		;
-	}
+	num =  strlen(text_content);
 
 	wr = write(fs, text_content, num);
-	
+
 	if (wr == -1)
 	{
 		return (-1);
