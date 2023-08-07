@@ -20,10 +20,6 @@ int create_file(const char *filename, char *text_content)
 	}
 
 	fs = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0600);
-	if (fs == -1)
-	{
-		return (-1);
-	}
 
 	num = strlen(text_content);
 
