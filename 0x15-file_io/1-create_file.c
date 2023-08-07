@@ -7,8 +7,7 @@
  */
 int create_file(const char *filename, char *text_content)
 {
-	int fs;
-	ssize_t num;
+	int fs, num, wr;
 
 	if (filename == NULL)
 	{
@@ -27,8 +26,12 @@ int create_file(const char *filename, char *text_content)
 	}
 
 	num = strlen(text_content);
-	write(fs, text_content, num);
-
+	wr = write(fs, text_content, num);
+	
+	if (wr == -1)
+	{
+		return (-1);
+	}
 	close(fs);
 	return (1);
 
