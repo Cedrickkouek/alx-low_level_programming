@@ -8,8 +8,9 @@
 int main(int argc, char *argv[])
 {
 	int source, destination;
-	int size1 = 1024, size2 = 0;
 	char buffer[1024];
+	size_t bytes_read;
+
 
 	if (argc != 3)
 	{
@@ -31,18 +32,11 @@ int main(int argc, char *argv[])
 		exit(99);
 	}
 
-	while (size1 == 1024)
+	while ((bytes_read = read(source, buffer, sizeof(buffer))) > 0)
 	{
-		size1 = read(source, buffer, 1024);
-		if (size1 == -1)
+		if (write(destination, buffer, bytes_read) < 0)
 		{
-			dprintf(STDERR_FILENO, "Error: Can't read from %s\n", argv[1]);
-			exit(98);
-		}
-		size2 = write(destination, buffer, size1);
-		if (size2 < size1)
-		{
-			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
+			dprintf(STDERR_FILENO, "Error: Can't write to file %s\n", argv[2]);
 			exit(99);
 		}
 	}
@@ -56,5 +50,7 @@ int main(int argc, char *argv[])
 		dprintf(STDERR_FILENO, "Error: Can't close destination %d\n", destination);
 		exit(100);
 	}
+	close(source);
+	close(destination);
 	return (0);
 }
