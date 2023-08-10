@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
 		exit(98);
 	}
 
-	destination = open(argv[2], O_WRONLY | O_CREAT, 0664);
+	destination = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC | S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
 	if (destination == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
@@ -47,16 +47,13 @@ int main(int argc, char *argv[])
 	}
 	if (close(source) == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", source);
+		dprintf(STDERR_FILENO, "Error: Can't close source  %d\n", source);
 		exit(100);
 	}
 	if (close(destination) == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", destination);
+		dprintf(STDERR_FILENO, "Error: Can't close destination %d\n", destination);
 		exit(100);
 	}
-	close(source);
-	close(destination);
-
 	return (0);
 }
