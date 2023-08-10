@@ -55,5 +55,8 @@ int main(int argc, char *argv[])
 		dprintf(STDERR_FILENO, "Error: Can't close destination %d\n", destination);
 		exit(100);
 	}
+	close(source);
+	close(destination);
+
 	return (0);
 }
