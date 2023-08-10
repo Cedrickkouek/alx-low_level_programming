@@ -47,12 +47,12 @@ int main(int argc, char *argv[])
 	}
 	if (close(source) == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't close source  %d\n", source);
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", source);
 		exit(100);
 	}
 	if (close(destination) == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't close destination %d\n", destination);
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", destination);
 		exit(100);
 	}
 	close(source);
