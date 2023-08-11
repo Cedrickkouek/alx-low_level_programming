@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
 {
 	int source, destination;
 	char buffer[1024];
-	size_t bytes_read;
+	int so1 = 1024, so2 = 0;
 
 
 	if (argc != 3)
@@ -32,12 +32,18 @@ int main(int argc, char *argv[])
 		exit(99);
 	}
 
-	while ((bytes_read = read(source, buffer, sizeof(buffer))) > 0)
+	while (so1 == 1024)
 	{
-		if (write(destination, buffer, bytes_read) < 0)
+		so1 = read(source, buffer, 1024);
+		if (so1 == -1)
 		{
 			dprintf(STDERR_FILENO, "Error: Can't write to file %s\n", argv[2]),
 			exit(99);
+		}
+		so2 = write(destination, buffer, so1);
+		if (so2 < so1)
+		{
+			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]), exit(99);
 		}
 	}
 	if (close(source) == -1)
@@ -50,7 +56,5 @@ int main(int argc, char *argv[])
 		dprintf(STDERR_FILENO, "Error: Can't close destination %d\n", destination),
 		exit(100);
 	}
-	close(source);
-	close(destination);
 	return (0);
 }
