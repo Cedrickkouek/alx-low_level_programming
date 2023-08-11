@@ -14,13 +14,13 @@ int main(int argc, char *argv[])
 
 	if (argc != 3)
 	{
-		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
+		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n"),
 		exit(97);
 	}
 	source = open(argv[1], O_RDONLY);
 	if (source == -1)
 	{
-		dprintf(STDERR_FILENO, " Error: Can't read from file %s\n", argv[1]);
+		dprintf(STDERR_FILENO, " Error: Can't read from file %s\n", argv[1]),
 		exit(98);
 	}
 
@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
 	if (destination == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
-		close(source);
+		close(source),
 		exit(99);
 	}
 
@@ -36,18 +36,18 @@ int main(int argc, char *argv[])
 	{
 		if (write(destination, buffer, bytes_read) < 0)
 		{
-			dprintf(STDERR_FILENO, "Error: Can't write to file %s\n", argv[2]);
+			dprintf(STDERR_FILENO, "Error: Can't write to file %s\n", argv[2]),
 			exit(99);
 		}
 	}
 	if (close(source) == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't close source  %d\n", source);
+		dprintf(STDERR_FILENO, "Error: Can't close source  %d\n", source),
 		exit(100);
 	}
 	if (close(destination) == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't close destination %d\n", destination);
+		dprintf(STDERR_FILENO, "Error: Can't close destination %d\n", destination),
 		exit(100);
 	}
 	close(source);
