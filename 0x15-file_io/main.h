@@ -8,6 +8,7 @@
 #include <sys/stat.h>
 #include <string.h>
 #include <unistd.h>
+#include <elf.h>
 
 
 ssize_t read_textfile(const char *filename, size_t letters);
