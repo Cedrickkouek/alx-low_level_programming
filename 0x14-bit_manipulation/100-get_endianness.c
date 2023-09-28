@@ -1,23 +1,14 @@
 #include "main.h"
+
 /**
- * get_endianness - checks the endianness
- * Return: 0 if big endian or 1 if little endian
+ *get_endianness - checks the endianness
+ *Return: 0 if big endian or 1 if little endian
  */
 int get_endianness(void)
 {
-	unsigned int num;
-	char byte_ord;
+	unsigned int x = 1;
 
-	num = 1;
-	byte_ord = (num & 0x01);
+	char *c = (char *) &x;
 
-	if (byte_ord == 1)
-	{
-		return (0);
-	}
-	else
-	{
-		return (1);
-	}
-
+	return ((int) *c);
 }
