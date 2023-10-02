@@ -1,60 +1,70 @@
 #include "main.h"
+
+void endPart(int src_fd, int dst_fd);
+
 /**
- * main - a func that copies the content of a file into another file
- * @argc: number of arguments parsed
- * @argv: array of arguments parsed
- * Return: 97, 98, 99 or 100 depending on the output
+ *main - a func that copies the content of a file into another file
+ *@argc: number of arguments parsed
+ *@argv: array of arguments parsed
+ *Return: 97, 98, 99 or 100 depending on the output
  */
 int main(int argc, char *argv[])
 {
-	int source, destination;
-	char buffer[1024];
-	int so1 = 1024, so2 = 0;
-
+	int src_fd, dst_fd, read_size;
+	char buffer[BUF_SIZE];
 
 	if (argc != 3)
 	{
-		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n"),
+		dprintf(2, "Usage: cp file_from file_to\n");
 		exit(97);
 	}
-	source = open(argv[1], O_RDONLY);
-	if (source == -1)
+	src_fd = open(argv[1], O_RDONLY);
+	if (src_fd < 0)
 	{
-		dprintf(STDERR_FILENO, " Error: Can't read from file %s\n", argv[1]),
+		dprintf(2, "Error: Can't read from file %s\n", argv[1]);
 		exit(98);
 	}
-
-	destination = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
-	if (destination == -1)
+	dst_fd = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, 0664);
+	if (dst_fd < 0)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
-		close(source),
+		dprintf(2, "Error: Can't write to %s\n", argv[2]);
+		close(src_fd);
 		exit(99);
 	}
-
-	while (so1 == 1024)
+	while ((read_size = read(src_fd, buffer, BUF_SIZE)) > 0)
 	{
-		so1 = read(source, buffer, 1024);
-		if (so1 == -1)
+		if (write(dst_fd, buffer, read_size) != read_size)
 		{
-			dprintf(STDERR_FILENO, "Error: Can't write to file %s\n", argv[2]),
+			dprintf(2, "Error: Can't write to %s\n", argv[2]);
+			close(src_fd);
+			close(dst_fd);
 			exit(99);
 		}
-		so2 = write(destination, buffer, so1);
-		if (so2 < so1)
-		{
-			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]), exit(99);
-		}
 	}
-	if (close(source) == -1)
+	if (read_size < 0)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't close source  %d\n", source),
-		exit(100);
+		dprintf(2, "Error: Can't read from file %s\n", argv[1]);
+		exit(98);
 	}
-	if (close(destination) == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't close destination %d\n", destination),
-		exit(100);
-	}
+	endPart(src_fd, dst_fd);
 	return (0);
+}
+/**
+ * endPart - a function that continues the main function
+ * @src_fd: arg1
+ * @dst_fd: arg2
+ * Return: nothing
+*/
+void endPart(int src_fd, int dst_fd)
+{
+	if (close(src_fd) < 0)
+	{
+		dprintf(2, "Error: Can't close fd %d\n", src_fd);
+		exit(100);
+	}
+	if (close(dst_fd) < 0)
+	{
+		dprintf(2, "Error: Can't close fd %d\n", dst_fd);
+		exit(100);
+	}
 }
