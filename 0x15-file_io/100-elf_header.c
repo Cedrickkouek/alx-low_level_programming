@@ -6,9 +6,11 @@
  */
 void print_elf_header(Elf64_Ehdr *header)
 {
+  int i;
+
 	printf("ELF Header:\n");
 	printf("  Magic:   ");
-	for (int i = 0; i < EI_NIDENT; i++)
+	for (i = 0; i < EI_NIDENT; i++)
 		printf("%02x ", header->e_ident[i]);
 	printf("\n");
 	printf("  Class:                             %s\n",
@@ -34,21 +36,22 @@ void print_elf_header(Elf64_Ehdr *header)
  */
 int main(int argc, char *argv[])
 {
+  int fd;
+  Elf64_Ehdr header; // Moved declaration here
+
 	if (argc != 2)
 	{
 		fprintf(stderr, "Usage: elf_header elf_filename\n");
 		exit(98);
 	}
 
-	int fd = open(argv[1], O_RDONLY);
+	fd = open(argv[1], O_RDONLY);
 
 	if (fd < 0)
 	{
 		perror("Error opening file");
 		exit(98);
 	}
-
-	Elf64_Ehdr header;
 
 	if (read(fd, &header, sizeof(header)) != sizeof(header))
 	{
