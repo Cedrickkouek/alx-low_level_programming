@@ -37,7 +37,7 @@ void print_elf_header(Elf64_Ehdr *header)
 int main(int argc, char *argv[])
 {
   int fd;
-  Elf64_Ehdr header; // Moved declaration here
+  Elf64_Ehdr header;
 
 	if (argc != 2)
 	{
