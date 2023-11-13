@@ -1,1 +1,1 @@
-These are doubly linked lists
+Dynamic libraries in C
