@@ -1,53 +1,61 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "search_algos.h"
 
 /**
- * print_array = A function to print search array
- * 
+ * recursive_search - searches for a value in an array of
+ * integers using the Binary search algorithm
+ *
+ *
+ * @array: input array
+ * @size: size of the array
+ * @value: value to search in
+ * Return: index of the number
  */
-int print_array(int *array, size_t L, size_t R) {
-    size_t i;
+int recursive_search(int *array, size_t size, int value)
+{
+	size_t half = size / 2;
+	size_t i;
 
-    printf("Searching in array: ");
-    for( i = L; i < R; i++) {
-        printf("%d, ", array[i]);
-    }
-    printf("%d\n", array[i]);
-    
-    return 0;
+	if (array == NULL || size == 0)
+		return (-1);
+
+	printf("Searching in array");
+
+	for (i = 0; i < size; i++)
+		printf("%s %d", (i == 0) ? ":" : ",", array[i]);
+
+	printf("\n");
+
+	if (half && size % 2 == 0)
+		half--;
+
+	if (value == array[half])
+		return ((int)half);
+
+	if (value < array[half])
+		return (recursive_search(array, half, value));
+
+	half++;
+
+	return (recursive_search(array + half, size - half, value) + half);
 }
 
 /**
- * binary_search - A function that searches for a value in an
- * array integers using Binary search algorithm
- * @array: An array pointer to the first element in the array to search in
- * @size: The number of elements in the array
- * @value: The value to search for
- * Return - If value is not present in array or
- * if array is NULL, your function must return -1
+ * binary_search - calls to binary_search to return
+ * the index of the number
+ *
+ * @array: input array
+ * @size: size of the array
+ * @value: value to search in
+ * Return: index of the number
  */
-int binary_search(int *array, size_t size, int value){
-    size_t L, R, m;
+int binary_search(int *array, size_t size, int value)
+{
+	int index;
 
-    L = 0;
-    R = size - 1;
+	index = recursive_search(array, size, value);
 
-    
-    while (L <= R) {
-        print_array(array, L, R);
-        m = (L + R) / 2;
+	if (index >= 0 && array[index] != value)
+		return (-1);
 
-        if (array[m] < value){
-            L = m + 1;
-        } 
-        else if (array[m] > value){
-            R = m - 1;
-        }
-        else {
-            return m;
-        }
-    }
-
-    return -1;
+	return (index);
 }
